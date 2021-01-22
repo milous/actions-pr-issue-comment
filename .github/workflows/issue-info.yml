@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: "Vypsání dat"
         env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_BODY: ${{ github.pull_request.body }}
           GITHUB_CONTENT_JSON: ${{ toJson(github) }}
-          GITHUB_JOB_JSON: ${{ toJson(job) }}
         run: |
-          echo "$GITHUB_CONTENT_JSON"
-          echo $GITHUB_JOB_JSON
-          curl "https://www.seznam.cz/"
+          echo "PR number: $PR_NUMBER"
+          echo "Body: $PR_BODY"
