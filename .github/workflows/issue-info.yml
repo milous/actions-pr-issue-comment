@@ -11,7 +11,7 @@ jobs:
       - uses: action/checkout@v2
       - uses: ./github/actions/issuebody
         with:
-          token: ${{ secreats.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: 3
           issue-number: 1
 
