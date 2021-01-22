@@ -11,8 +11,10 @@ try {
 
 	const octokit = new github.getOctokit(token);
 
-	octokit.request('PATCH https://api.github.com/repos/milous/actions-pr-issue-comment/issues/2', {
-		body: 'octocat zaslaný přes ghactions',
+	const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
+
+	octokit.request('PATCH https://api.github.com/repos/milous/actions-pr-issue-comment/issues/{issueNumber}', {
+		body: issueBody,
 	})
 
 
