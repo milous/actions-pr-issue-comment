@@ -23,7 +23,7 @@ jobs:
 
             ISSUE=$(curl --location --request GET $ISSUE_URL --header 'Content-Type: application/json' --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
             echo "issue:"
-            echo $ISSUE.body
+            echo $ISSUE[body]
 
             echo "cislo issue: ${BASH_REMATCH[1]}"
             echo "cislo issue v2: $ISSUE_NUMBER"
