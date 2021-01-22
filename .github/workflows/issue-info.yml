@@ -8,6 +8,13 @@ jobs:
   info:
     runs-on: ubuntu-latest
     steps:
+      - uses: action/checkout@v2
+      - uses: ./github/actions/issuebody
+        with:
+          token: ${{ secreats.GITHUB_TOKEN }}
+          pr-number: 3
+          issue-number: 1
+
       - name: "Vypsání dat"
         env:
           PR_NUMBER: ${{ github.event.number }}
