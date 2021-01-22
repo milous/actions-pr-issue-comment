@@ -18,7 +18,7 @@ try {
 
 	const octokit = new github.getOctokit(token);
 
-	octokit.request('PUT /repos/milous/actions-pr-issue-comment/issues/2', {
+	octokit.request('PATCH https://api.github.com/repos/milous/actions-pr-issue-comment/issues/2', {
 		body: 'octocat zaslaný přes ghactions',
 	})
 
