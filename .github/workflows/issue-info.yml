@@ -16,3 +16,4 @@ jobs:
         run: |
           echo "PR number: $PR_NUMBER"
           echo "Body: $PR_BODY"
+          echo "$GITHUB_CONTENT_JSON"
