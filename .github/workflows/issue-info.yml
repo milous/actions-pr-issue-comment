@@ -19,8 +19,9 @@ jobs:
           regex="Issue\: \#([[:digit:]]+)"
           if [[ $PR_BODY =~ $regex ]]; then
             ISSUE_NUMBER=${BASH_REMATCH[1]}
+            ISSUE_URL="https://api.github.com/repos/milous/actions-pr-issue-comment/issues/$ISSUE_NUMBER"
 
-            ISSUE=$(curl --location --request GET 'https://api.github.com/repos/milous/actions-pr-issue-comment/issues/$PR_NUMBER' --header 'Content-Type: application/json' --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
+            ISSUE=$(curl --location --request GET $ISSUE_URL --header 'Content-Type: application/json' --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
             echo "issue:"
             echo $ISSUE.body
 
