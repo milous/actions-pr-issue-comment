@@ -18,7 +18,7 @@ jobs:
           echo "Body: $PR_BODY"
           regex="Issue\: \#([[:digit:]]+)"
           if [[ $PR_BODY =~ $regex ]]; then
-            ISSUE_NUMBER:${BASH_REMATCH[1]}
+            ISSUE_NUMBER=${BASH_REMATCH[1]}
             echo "cislo issue: ${BASH_REMATCH[1]}"
             echo "cislo issue v2: $ISSUE_NUMBER"
           fi
