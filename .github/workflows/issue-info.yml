@@ -1,0 +1,16 @@
+name: Přidání informací o testserveru do ISSUE
+
+on:
+  pull_request:
+    types: [opened, reopened, closed]
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Vypsání dat"
+        env:
+          GITHUB_CONTENT_JSON: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTENT_JSON"
+          curl "https://www.seznam.cz/"
