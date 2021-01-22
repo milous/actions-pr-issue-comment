@@ -16,8 +16,9 @@ jobs:
         run: |
           echo "PR number: $PR_NUMBER"
           echo "Body: $PR_BODY"
-          echo "$GITHUB_CONTENT_JSON"
           regex="Issue\: \#([[:digit:]]+)"
           if [[ $PR_NUMBER =~ $regex ]]; then
             echo "cislo issue: ${BASH_REMATCH[1]}"
+          else
+            echo "neobsajuje"
           fi
