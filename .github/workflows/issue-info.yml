@@ -11,6 +11,8 @@ jobs:
       - name: "Vypsání dat"
         env:
           GITHUB_CONTENT_JSON: ${{ toJson(github) }}
+          GITHUB_JOB_JSON: ${{ toJson(job) }}
         run: |
           echo "$GITHUB_CONTENT_JSON"
+          echo $GITHUB_JOB_JSON
           curl "https://www.seznam.cz/"
