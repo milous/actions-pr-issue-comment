@@ -9,7 +9,7 @@ try {
 	const issueNumber = core.getInput('issue-number');
 	const prNumber = core.getInput('pr-number');
 
-	const octokit = new github.GitHub(token);
+	const octokit = new github.getOctokit(token);
 
 	octokit.request('PUT /repos/milous/actions-pr-issue-comment/issues/2', {
 		body: 'octocat zaslaný přes ghactions',
