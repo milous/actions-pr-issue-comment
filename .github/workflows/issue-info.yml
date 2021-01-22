@@ -19,6 +19,11 @@ jobs:
           regex="Issue\: \#([[:digit:]]+)"
           if [[ $PR_BODY =~ $regex ]]; then
             ISSUE_NUMBER=${BASH_REMATCH[1]}
+
+            ISSUE=$(curl --location --request GET 'https://api.github.com/repos/milous/actions-pr-issue-comment/issues/2' --header 'Content-Type: application/json' --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
+            echo "issue:"
+            echo "$ISSUE"
+
             echo "cislo issue: ${BASH_REMATCH[1]}"
             echo "cislo issue v2: $ISSUE_NUMBER"
           fi
