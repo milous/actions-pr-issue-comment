@@ -11,7 +11,7 @@ jobs:
       - name: "Vypsání dat"
         env:
           PR_NUMBER: ${{ github.event.number }}
-          PR_BODY: ${{ github.pull_request.body }}
+          PR_BODY: ${{ github.event.pull_request.body }}
           GITHUB_CONTENT_JSON: ${{ toJson(github) }}
         run: |
           echo "PR number: $PR_NUMBER"
