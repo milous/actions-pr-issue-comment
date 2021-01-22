@@ -13,7 +13,7 @@ try {
 
 	const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
 
-	octokit.request('PATCH https://api.github.com/repos/milous/actions-pr-issue-comment/issues/{issueNumber}', {
+	octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
 		body: issueBody,
 	})
 
