@@ -1,0 +1,28 @@
+name: 'Aktualizuje issue body'
+description: 'Prolinkuje s testovacím serverem'
+inputs:
+    token: # id of input
+        description: 'Int issue number'
+        required: true
+    repo:
+        description: 'Repository'
+        required: true
+    event:
+        description: 'PR created event'
+        required: true
+    issue-number:  # id of input
+        description: 'Int issue number'
+        required: true
+    pr-number: # id of input
+        description: 'Int pr number'
+        required: true
+    issue-regexp:
+        description: 'Regular expression for detect issue'
+        required: true
+        default: 'Issue: #([0-9]+)'
+outputs:
+    time: # id of output
+        description: 'The time we greeted you'
+runs:
+    using: 'node12'
+    main: 'dist/index.js'
