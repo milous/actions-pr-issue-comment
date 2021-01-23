@@ -20,6 +20,13 @@ try {
 
 	const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
 
+	octokit
+		.request('GET /repos/milous/actions-pr-issue-comment/issues/1')
+		.then(function (res) {
+			console.log(res);
+		})
+	;
+
 	octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
 		body: issueBody,
 	})
