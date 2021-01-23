@@ -25,7 +25,7 @@ try {
 		.then(function (res) {
 			console.log(res.data.body);
 
-			const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
+			const issueBody = 'PR #' + prNumber + "\n---\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
 
 			octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
 				body: issueBody,
