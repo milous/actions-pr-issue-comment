@@ -4,6 +4,8 @@ inputs:
     token: # id of input
         description: 'Int issue number'
         required: true
+    repo:
+        required: true
     issue-number:  # id of input
         description: 'Int issue number'
         required: true

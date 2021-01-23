@@ -6,19 +6,24 @@ try {
 	// npx ncc build .github/actions/issuebody/index.js -o .github/actions/issuebody/dist/
 	// npm i -g @zeit/ncc
 	const token = core.getInput('token');
+	const repo = core.getInput('repo');
 	const issueNumber = core.getInput('issue-number');
 	const prNumber = core.getInput('pr-number');
+
+	// const issueBodyPrefix = core.getInput('issue-body-prefix');
+	// const issueBodySuffix = core.getInput('issue-body-suffix');
 
 	const octokit = new github.getOctokit(token);
 
 	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
+	console.log(repo);
 
 	octokit
-		.request('GET /repos/milous/actions-pr-issue-comment/issues/1')
+		.request(`GET /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`)
 		.then(function (res) {
 			console.log(res.data.body);
 
-			const issueBody = 'PR #' + prNumber + "\n---\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
+			const issueBody = 'PR #' + prNumber + "\n\n---\n\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
 
 			octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
 				body: issueBody,
