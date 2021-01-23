@@ -56,10 +56,6 @@ try {
 		})
 	;
 
-	// octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
-	// 	body: issueBody,
-	// })
-
 
 	console.log(`IssueNumber ${issueNumber}!`);
 	console.log(`PrNumber ${prNumber}!`);
