@@ -26,7 +26,7 @@ try {
 	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
 	console.log(`ssueNumber ${repo}!`);
 	console.log(event);
-	console.log(event.number);
+	console.log(JSON.parse(event).number);
 
 	octokit
 		.request(`GET /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`)
