@@ -16,7 +16,7 @@ try {
 	const octokit = new github.getOctokit(token);
 
 	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
-	console.log(repo);
+	console.log(`ssueNumber ${repo}!`);
 
 	octokit
 		.request(`GET /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`)
