@@ -15,28 +15,21 @@ try {
 	const token = core.getInput('token');
 	const event = JSON.parse(core.getInput('event'));
 	const issueNumber = core.getInput('issue-number');
+	const regexp = core.getInput('issue-regexp');
 	const prNumber = event.number;
 	const repo = event.repository.full_name;
 
-	console.log(repo);
-
+	console.log(regexp);
 	// const issueBodyPrefix = core.getInput('issue-body-prefix');
 	// const issueBodySuffix = core.getInput('issue-body-suffix');
 
 	const octokit = new github.getOctokit(token);
-	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
-	console.log(`ssueNumber ${repo}!`);
-	console.log(event);
-	// console.log(JSON.parse(event).number);
-
 	octokit
-		.request(`GET /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`)
+		.request(`GET /repos/${repo}/issues/${issueNumber}`)
 		.then(function (res) {
-			console.log(res.data.body);
-
 			const issueBody = 'PR #' + prNumber + "\n\n---\n\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
 
-			octokit.request(`PATCH /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`, {
+			octokit.request(`PATCH /repos/${repo}/issues/${issueNumber}`, {
 				body: issueBody,
 			})
 		})
