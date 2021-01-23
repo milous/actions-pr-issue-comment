@@ -8,11 +8,17 @@ try {
 	const token = core.getInput('token');
 	const event = JSON.parse(core.getInput('event'));
 	const issueNumber = core.getInput('issue-number');
-	const regexp = core.getInput('issue-regexp');
+	const pattern = core.getInput('issue-regexp');
 	const prNumber = event.number;
+	const prBody = event.pull_request.body;
 	const repo = event.repository.full_name;
 
+	console.log(prBody);
 	console.log(regexp);
+
+	const re = new RegExp(pattern, "g");
+
+	console.log(prBody.match(re));
 	// const issueBodyPrefix = core.getInput('issue-body-prefix');
 	// const issueBodySuffix = core.getInput('issue-body-suffix');
 
