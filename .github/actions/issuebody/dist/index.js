@@ -18,18 +18,24 @@ try {
 
 	const octokit = new github.getOctokit(token);
 
-	const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
+	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
 
 	octokit
 		.request('GET /repos/milous/actions-pr-issue-comment/issues/1')
 		.then(function (res) {
-			console.log(res);
+			console.log(res.data.body);
+
+			const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
+
+			octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
+				body: issueBody,
+			})
 		})
 	;
 
-	octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
-		body: issueBody,
-	})
+	// octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
+	// 	body: issueBody,
+	// })
 
 
 	console.log(`IssueNumber ${issueNumber}!`);
