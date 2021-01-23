@@ -14,7 +14,7 @@ try {
 	const repo = event.repository.full_name;
 
 	console.log(prBody);
-	console.log(regexp);
+	// console.log(regexp);
 
 	const re = new RegExp(pattern, "g");
 
