@@ -32,7 +32,7 @@ try {
 
 			const issueBody = 'PR #' + prNumber + "\n\n---\n\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
 
-			octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
+			octokit.request(`PATCH /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`, {
 				body: issueBody,
 			})
 		})
