@@ -24,7 +24,9 @@ try {
 		return;
 	}
 
-	console.log('issue number z pr body' + matches[0].replace(/\D/g, ""));
+	const issueNumberDetected = matches[0].replace(/\D/g, "");
+
+	console.log('issue number z pr body ' + issueNumberDetected);
 
 
 
@@ -44,11 +46,11 @@ try {
 
 	const octokit = new github.getOctokit(token);
 	octokit
-		.request(`GET /repos/${repo}/issues/${issueNumber}`)
+		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
 		.then(function (res) {
 			const issueBody = 'PR #' + prNumber + "\n\n---\n\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
 
-			octokit.request(`PATCH /repos/${repo}/issues/${issueNumber}`, {
+			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
 				body: issueBody,
 			})
 		})
