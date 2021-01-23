@@ -12,7 +12,7 @@ jobs:
       - uses: ./.github/actions/issuebody
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repo: ${{ GITHUB_REPOSITORY }}
+          repo: GITHUB_REPOSITORY
           pr-number: 3
           issue-number: 2
 
