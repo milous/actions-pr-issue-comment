@@ -23,9 +23,29 @@ try {
 	console.log(prBody);
 	// console.log(regexp);
 
-	const re = new RegExp(pattern, "g");
+	const matches = prBody.match(new RegExp(pattern, "g"));
 
-	console.log(prBody.match(re));
+	if (matches === null) {
+		console.log('Nepodařilo se načíst číslo issue z PR message');
+
+		return;
+	}
+
+	console.log('issue number z pr body' + matches[0].replace(/\D/g, ""));
+
+
+
+	// // var re = new RegExp("Issue: #([0-9]+)", "g");
+	// myString.match(re)[0].replace(/\D/g, "");
+	//
+	// if ()
+	//
+	// 	var myString = "something Issue: # 1234 format_abc";
+	// var re = new RegExp("Issue: #([0-9]+)", "g");
+	// myString.match(re);
+	// 	[0].replace(/\D/g, "");
+
+	// console.log(prBody.match(re));
 	// const issueBodyPrefix = core.getInput('issue-body-prefix');
 	// const issueBodySuffix = core.getInput('issue-body-suffix');
 
