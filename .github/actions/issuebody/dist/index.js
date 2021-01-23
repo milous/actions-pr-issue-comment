@@ -16,7 +16,7 @@ try {
 	const event = JSON.parse(core.getInput('event'));
 	const issueNumber = core.getInput('issue-number');
 	const prNumber = event.number;
-	const repo = event.base.repo.full_name;
+	const repo = event.repository.full_name;
 
 	console.log(repo);
 
