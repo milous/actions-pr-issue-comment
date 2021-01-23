@@ -14,6 +14,7 @@ try {
 	// npm i -g @zeit/ncc
 	const token = core.getInput('token');
 	const repo = core.getInput('repo');
+	const event = core.getInput('event');
 	const issueNumber = core.getInput('issue-number');
 	const prNumber = core.getInput('pr-number');
 
@@ -24,6 +25,7 @@ try {
 
 	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
 	console.log(`ssueNumber ${repo}!`);
+	console.log(event);
 
 	octokit
 		.request(`GET /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`)

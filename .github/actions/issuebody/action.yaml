@@ -5,6 +5,10 @@ inputs:
         description: 'Int issue number'
         required: true
     repo:
+        description: 'Repository'
+        required: true
+    event:
+        description: 'PR created event'
         required: true
     issue-number:  # id of input
         description: 'Int issue number'
