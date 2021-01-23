@@ -13,20 +13,21 @@ try {
 	// npx ncc build .github/actions/issuebody/index.js -o .github/actions/issuebody/dist/
 	// npm i -g @zeit/ncc
 	const token = core.getInput('token');
-	const repo = core.getInput('repo');
-	const event = core.getInput('event');
+	const event = JSON.parse(core.getInput('event'));
 	const issueNumber = core.getInput('issue-number');
-	const prNumber = core.getInput('pr-number');
+	const prNumber = event.number;
+	const repo = event.base.repo.full_name;
+
+	console.log(repo);
 
 	// const issueBodyPrefix = core.getInput('issue-body-prefix');
 	// const issueBodySuffix = core.getInput('issue-body-suffix');
 
 	const octokit = new github.getOctokit(token);
-
 	// const issueBody = 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString();
 	console.log(`ssueNumber ${repo}!`);
 	console.log(event);
-	console.log(JSON.parse(event).number);
+	// console.log(JSON.parse(event).number);
 
 	octokit
 		.request(`GET /repos/milous/actions-pr-issue-comment/issues/${issueNumber}`)
