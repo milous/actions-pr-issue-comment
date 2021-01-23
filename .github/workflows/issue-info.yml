@@ -13,7 +13,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repo: ${{ github.GITHUB_REPOSITORY }}
-          event: ${{ github.event }}
+          event: ${{ toJson(github.event) }}
           pr-number: 3
           issue-number: 2
 
