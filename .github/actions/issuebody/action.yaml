@@ -12,6 +12,12 @@ inputs:
         description: 'Regular expression for issue detection'
         required: true
         default: 'Issue: #([0-9]+)'
+    prepend-issue-message:
+        description: 'Placeholders [[issueNumber]] [prNumber]]'
+        default: ''
+    append-issue-message:
+        description: 'Placeholders [[issueNumber]] [prNumber]]'
+        default: ''
 
 outputs:
     issue-number:

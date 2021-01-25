@@ -27,12 +27,23 @@ try {
 	const issueNumberDetected = matches[0].replace(/\D/g, "");
 	core.setOutput("issue-number", issueNumberDetected);
 
+	const prependIssueMessage = core
+		.getInput('prepend-issue-message')
+		.replaceAll('[[issueNumber]]', issueNumberDetected)
+		.replaceAll('[[prNumber]]', prNumber)
+	;
+
+	const appendIssueMessage = core
+		.getInput('append-issue-message')
+		.replaceAll('[[issueNumber]]', issueNumberDetected)
+		.replaceAll('[[prNumber]]', prNumber)
+	;
+
 	const octokit = new github.getOctokit(token);
 	octokit
 		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
 		.then(function (res) {
-			const issueBody = 'PR #' + prNumber + "\n\n---\n\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
-
+			const issueBody = prependIssueMessage + res.data.body + appendIssueMessage;
 			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
 				body: issueBody,
 			})

@@ -12,26 +12,27 @@ jobs:
       - uses: ./.github/actions/issuebody
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repo: ${{ github.GITHUB_REPOSITORY }}
           event: ${{ toJson(github.event) }}
+          prepend-issue-message: "Připraveno v PR: #[[prNumber]]\nTestovací url: https:://[[prNumber]].testing.commik\n\n---\m\m"
+          append-issue-message: "A název issue by měl být: #[[issueNumber]]"
 
-      - name: "Vypsání dat"
-        env:
-          PR_NUMBER: ${{ github.event.number }}
-          PR_BODY: ${{ github.event.pull_request.body }}
-          GITHUB_CONTENT_JSON: ${{ toJson(github) }}
-        run: |
-          echo "PR number: $PR_NUMBER"
-          echo "Body: $PR_BODY"
-          regex="Issue\: \#([[:digit:]]+)"
-          if [[ $PR_BODY =~ $regex ]]; then
-            ISSUE_NUMBER=${BASH_REMATCH[1]}
-            ISSUE_URL="https://api.github.com/repos/milous/actions-pr-issue-comment/issues/$ISSUE_NUMBER"
-
-            ISSUE=$(curl --location --request GET $ISSUE_URL --header 'Content-Type: application/json' --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
-            echo "issue:"
-            echo $ISSUE[body]
-
-            echo "cislo issue: ${BASH_REMATCH[1]}"
-            echo "cislo issue v2: $ISSUE_NUMBER"
-          fi
+#      - name: "Vypsání dat"
+#        env:
+#          PR_NUMBER: ${{ github.event.number }}
+#          PR_BODY: ${{ github.event.pull_request.body }}
+#          GITHUB_CONTENT_JSON: ${{ toJson(github) }}
+#        run: |
+#          echo "PR number: $PR_NUMBER"
+#          echo "Body: $PR_BODY"
+#          regex="Issue\: \#([[:digit:]]+)"
+#          if [[ $PR_BODY =~ $regex ]]; then
+#            ISSUE_NUMBER=${BASH_REMATCH[1]}
+#            ISSUE_URL="https://api.github.com/repos/milous/actions-pr-issue-comment/issues/$ISSUE_NUMBER"
+#
+#            ISSUE=$(curl --location --request GET $ISSUE_URL --header 'Content-Type: application/json' --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
+#            echo "issue:"
+#            echo $ISSUE[body]
+#
+#            echo "cislo issue: ${BASH_REMATCH[1]}"
+#            echo "cislo issue v2: $ISSUE_NUMBER"
+#          fi
