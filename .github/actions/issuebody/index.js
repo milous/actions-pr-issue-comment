@@ -53,7 +53,7 @@ try {
 		.then(function (res) {
 			let issueBody = res.data.body;
 			if (prependIssueMessageReplaced !== '') {
-				issueBody = prependIssueMessageReplaced + "\n";
+				issueBody = prependIssueMessageReplaced + "\n" + issueBody;
 			}
 
 			if (appendIssueMessageReplaced !== '') {
