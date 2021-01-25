@@ -27,14 +27,14 @@ try {
 	const issueNumberDetected = matches[0].replace(/\D/g, "");
 	core.setOutput("issue-number", issueNumberDetected);
 
-	const prependIssueMessage = core
-		.getInput('prepend-issue-message')
+	const prependIssueMessage = core.getInput('prepend-issue-message');
+	const prependIssueMessageReplaced = prependIssueMessage
 		.replaceAll('[[issueNumber]]', issueNumberDetected)
 		.replaceAll('[[prNumber]]', prNumber)
 	;
 
-	const appendIssueMessage = core
-		.getInput('append-issue-message')
+	const appendIssueMessage = core.getInput('append-issue-message');
+	const appendIssueMessageReplaced = appendIssueMessage
 		.replaceAll('[[issueNumber]]', issueNumberDetected)
 		.replaceAll('[[prNumber]]', prNumber)
 	;
@@ -43,7 +43,7 @@ try {
 	octokit
 		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
 		.then(function (res) {
-			const issueBody = prependIssueMessage + res.data.body + appendIssueMessage;
+			const issueBody = prependIssueMessageReplaced + res.data.body + appendIssueMessageReplaced;
 			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
 				body: issueBody,
 			})
