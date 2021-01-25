@@ -13,8 +13,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           event: ${{ toJson(github.event) }}
-          prepend-issue-message: "Připraveno v PR: #[[prNumber]]\nTestovací url: https:://[[prNumber]].testing.commik.cz\n\n---\n\n "
-          append-issue-message: "\nnázev issue by měl být: #[[issueNumber]]"
+          prepend-issue-message: "Připraveno v PR: #[[prNumber]]\nTestovací url: https://[[prNumber]].testing.commik.cz\n\n---"
+          append-issue-message: "název issue by měl být: #[[issueNumber]]"
 
 #      - name: "Vypsání dat"
 #        env:

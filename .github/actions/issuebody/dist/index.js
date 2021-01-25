@@ -58,10 +58,19 @@ try {
 	octokit
 		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
 		.then(function (res) {
-			const issueBody = prependIssueMessageReplaced + "\n" + res.data.body + "\n" + appendIssueMessageReplaced;
+			let issueBody = res.data.body;
+			if (prependIssueMessageReplaced !== '') {
+				issueBody = prependIssueMessageReplaced + "\n";
+			}
+
+			if (appendIssueMessageReplaced !== '') {
+				issueBody += "\n" + appendIssueMessageReplaced;
+			}
+
+			// const issueBody = prependIssueMessageReplaced + "\n" + res.data.body + "\n" + appendIssueMessageReplaced;
 			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
 				body: issueBody,
-			})
+			});
 		})
 	;
 } catch (error) {
