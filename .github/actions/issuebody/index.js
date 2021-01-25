@@ -29,9 +29,10 @@ try {
 
 	const prependIssueMessage = core.getInput('prepend-issue-message');
 	console.log(prependIssueMessage);
+	console.log(`${prependIssueMessage}`);
 	const prependIssueMessageReplaced = prependIssueMessage
-		.replaceAll('[[issueNumber]]', issueNumberDetected)
-		.replaceAll('[[prNumber]]', prNumber)
+		.replace('[[issueNumber]]', issueNumberDetected)
+		.replace('[[prNumber]]', prNumber)
 	;
 
 	const appendIssueMessage = core.getInput('append-issue-message');
