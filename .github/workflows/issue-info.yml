@@ -14,8 +14,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repo: ${{ github.GITHUB_REPOSITORY }}
           event: ${{ toJson(github.event) }}
-          pr-number: 3
-          issue-number: 2
 
       - name: "Vypsání dat"
         env:
