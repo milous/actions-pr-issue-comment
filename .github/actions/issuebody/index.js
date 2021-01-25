@@ -39,9 +39,13 @@ try {
 
 	const appendIssueMessage = core.getInput('append-issue-message');
 	const appendIssueMessageReplaced = appendIssueMessage
-		.replaceAll('[[issueNumber]]', issueNumberDetected)
-		.replaceAll('[[prNumber]]', prNumber)
+		.replace(/\[\[issueNumber\]\]/g, issueNumberDetected)
+		.replace(/\[\[prNumber\]\]/g, prNumber)
 	;
+
+	if (prependIssueMessageReplaced === '' && appendIssueMessage === '') {
+		core.setFailed('Není nic k nahrazení. Nebudeme updatovat popis issue');
+	}
 
 	const octokit = new github.getOctokit(token);
 	octokit
