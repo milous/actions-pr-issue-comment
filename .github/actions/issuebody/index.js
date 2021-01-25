@@ -28,6 +28,7 @@ try {
 	core.setOutput("issue-number", issueNumberDetected);
 
 	const prependIssueMessage = core.getInput('prepend-issue-message');
+	console.log(prependIssueMessage);
 	const prependIssueMessageReplaced = prependIssueMessage
 		.replaceAll('[[issueNumber]]', issueNumberDetected)
 		.replaceAll('[[prNumber]]', prNumber)
