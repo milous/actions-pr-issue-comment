@@ -43,7 +43,7 @@ try {
 		core.setFailed('Není nic k nahrazení. Nebudeme updatovat popis issue');
 	}
 
-	const searchUrl = `GET /search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
+	const searchUrl = `GET https://api.github.com/search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
 	console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
 
