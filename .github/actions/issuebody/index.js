@@ -44,12 +44,14 @@ try {
 	}
 
 	// const searchUrl = `GET https://api.github.com/search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
-	const searchUrl = 'GET https://api.github.com/search/issues?q=is:pr+repo:milous/actions-pr-issue-comment+in:body+"Issue%3A+%234"';
-	console.log(searchUrl);
+	// const searchUrl = 'GET https://api.github.com/search/issues?q=is:pr+repo:milous/actions-pr-issue-comment+in:body+"Issue%3A+%234"';
+	// console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
 
 	octokit
-		.request(searchUrl)
+		.request('GET /search/issues', {
+			q: "is:pr+repo:milous/actions-pr-issue-comment+in:body+\"Issue: #4\""
+		})
 		.then(function (res) {
 			console.log(res);
 			console.log(res.data);
