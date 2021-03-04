@@ -50,7 +50,8 @@ try {
 		core.setFailed('Není nic k nahrazení. Nebudeme updatovat popis issue');
 	}
 
-	const searchUrl = `GET https://api.github.com/search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
+	// const searchUrl = `GET https://api.github.com/search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
+	const searchUrl = 'https://api.github.com/search/issues?q=is:pr+repo:milous/actions-pr-issue-comment+in:body+"Issue: %234"';
 	console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
 
@@ -58,6 +59,7 @@ try {
 		.request(searchUrl)
 		.then(function (res) {
 			console.log(res);
+			console.log(res.data);
 		})
 	;
 
