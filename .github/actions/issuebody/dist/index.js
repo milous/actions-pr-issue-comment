@@ -51,14 +51,15 @@ try {
 	}
 
 	const searchUrl = `GET /search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
+	console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
 
-	octokit
-		.request(searchUrl)
-		.then(function (res) {
-			console.log(res);
-		})
-	;
+	// octokit
+	// 	.request(searchUrl)
+	// 	.then(function (res) {
+	// 		console.log(res);
+	// 	})
+	// ;
 
 	octokit
 		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
