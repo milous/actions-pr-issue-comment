@@ -57,7 +57,7 @@ try {
 	octokit
 		.request(searchUrl)
 		.then(function (res) {
-			console.log(res.items);
+			console.log(res);
 		})
 	;
 
