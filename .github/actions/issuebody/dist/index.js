@@ -14,69 +14,93 @@ try {
 	// npm i -g @zeit/ncc
 	const token = core.getInput('token');
 	const event = JSON.parse(core.getInput('event'));
-	const issueNumber = core.getInput('issue-number');
 	const pattern = core.getInput('issue-regexp');
+
 	const prNumber = event.number;
 	const prBody = event.pull_request.body;
 	const repo = event.repository.full_name;
 
-	console.log(prBody);
-	// console.log(regexp);
-
 	const matches = prBody.match(new RegExp(pattern, "g"));
 
+	core.setOutput("pr-number", prNumber);
+	core.setOutput("pr-body", prBody);
+
 	if (matches === null) {
-		console.log('Nepodařilo se načíst číslo issue z PR message');
+		core.setOutput("issue-number", '');
 
 		return;
 	}
 
 	const issueNumberDetected = matches[0].replace(/\D/g, "");
+	core.setOutput("issue-number", issueNumberDetected);
 
-	console.log('issue number z pr body ' + issueNumberDetected);
+	const prependIssueMessage = core.getInput('prepend-issue-message');
+	const prependIssueMessageReplaced = prependIssueMessage
+		.replace(/\[\[issueNumber\]\]/g, issueNumberDetected)
+		.replace(/\[\[prNumber\]\]/g, prNumber)
+	;
 
+	const appendIssueMessage = core.getInput('append-issue-message');
+	const appendIssueMessageReplaced = appendIssueMessage
+		.replace(/\[\[issueNumber\]\]/g, issueNumberDetected)
+		.replace(/\[\[prNumber\]\]/g, prNumber)
+	;
 
+	if (prependIssueMessageReplaced === '' && appendIssueMessage === '') {
+		core.setFailed('Není nic k nahrazení. Nebudeme updatovat popis issue');
+	}
 
-	// // var re = new RegExp("Issue: #([0-9]+)", "g");
-	// myString.match(re)[0].replace(/\D/g, "");
-	//
-	// if ()
-	//
-	// 	var myString = "something Issue: # 1234 format_abc";
-	// var re = new RegExp("Issue: #([0-9]+)", "g");
-	// myString.match(re);
-	// 	[0].replace(/\D/g, "");
-
-	// console.log(prBody.match(re));
-	// const issueBodyPrefix = core.getInput('issue-body-prefix');
-	// const issueBodySuffix = core.getInput('issue-body-suffix');
-
+	// const searchUrl = `GET https://api.github.com/search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
+	// const searchUrl = 'GET https://api.github.com/search/issues?q=is:pr+repo:milous/actions-pr-issue-comment+in:body+"Issue%3A+%234"';
+	// console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
-	octokit
-		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
-		.then(function (res) {
-			const issueBody = 'PR #' + prNumber + "\n\n---\n\n" + 'octocat zaslaný přes ghactions ' + (new Date()).toTimeString() + res.data.body;
 
-			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
-				body: issueBody,
-			})
+	octokit
+		.request('GET /search/issues', {
+			q: "is:pr+repo:milous/actions-pr-issue-comment+in:body+\"Issue: #4\""
+		})
+		.then(function (res) {
+			console.log(res);
+			console.log(res.data);
 		})
 	;
 
-	// octokit.request('PATCH /repos/milous/actions-pr-issue-comment/issues/1', {
-	// 	body: issueBody,
-	// })
+	octokit
+		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
+		.then(function (res) {
+			let issueBody = res.data.body;
+			if (prependIssueMessageReplaced !== '') {
+				issueBody = prependIssueMessageReplaced + "\n" + issueBody;
+			}
+
+			if (appendIssueMessageReplaced !== '') {
+				issueBody += "\n" + appendIssueMessageReplaced;
+			}
+
+			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
+				body: issueBody,
+			});
+		})
+	;
 
 
-	console.log(`IssueNumber ${issueNumber}!`);
-	console.log(`PrNumber ${prNumber}!`);
-	const time = (new Date()).toTimeString();
-	//
-	core.setOutput("time", time);
-	// // Get the JSON webhook payload for the event that triggered the workflow
-	// const payload = JSON.stringify(github.context.payload, undefined, 2)
-	// console.log(`The event payload: ${payload}`);
+	octokit
+		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
+		.then(function (res) {
+			let issueBody = res.data.body;
+			if (prependIssueMessageReplaced !== '') {
+				issueBody = prependIssueMessageReplaced + "\n" + issueBody;
+			}
 
+			if (appendIssueMessageReplaced !== '') {
+				issueBody += "\n" + appendIssueMessageReplaced;
+			}
+
+			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
+				body: issueBody,
+			});
+		})
+	;
 } catch (error) {
 	core.setFailed(error.message);
 }
