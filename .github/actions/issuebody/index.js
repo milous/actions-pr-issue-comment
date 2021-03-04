@@ -47,12 +47,12 @@ try {
 	console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
 
-	// octokit
-	// 	.request(searchUrl)
-	// 	.then(function (res) {
-	// 		console.log(res);
-	// 	})
-	// ;
+	octokit
+		.request(searchUrl)
+		.then(function (res) {
+			console.log(res.items);
+		})
+	;
 
 	octokit
 		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
