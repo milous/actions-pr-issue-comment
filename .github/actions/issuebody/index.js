@@ -43,7 +43,35 @@ try {
 		core.setFailed('Není nic k nahrazení. Nebudeme updatovat popis issue');
 	}
 
+	const searchUrl = `GET /search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
 	const octokit = new github.getOctokit(token);
+
+	octokit
+		.request(searchUrl)
+		.then(function (res) {
+			console.log(res);
+		})
+	;
+
+	octokit
+		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
+		.then(function (res) {
+			let issueBody = res.data.body;
+			if (prependIssueMessageReplaced !== '') {
+				issueBody = prependIssueMessageReplaced + "\n" + issueBody;
+			}
+
+			if (appendIssueMessageReplaced !== '') {
+				issueBody += "\n" + appendIssueMessageReplaced;
+			}
+
+			octokit.request(`PATCH /repos/${repo}/issues/${issueNumberDetected}`, {
+				body: issueBody,
+			});
+		})
+	;
+
+
 	octokit
 		.request(`GET /repos/${repo}/issues/${issueNumberDetected}`)
 		.then(function (res) {
