@@ -51,7 +51,7 @@ try {
 	}
 
 	// const searchUrl = `GET https://api.github.com/search/issues?q=is:pr+repo:${repo}+in:body+"Issue: %23${issueNumberDetected}"`;
-	const searchUrl = 'https://api.github.com/search/issues?q=is:pr+repo:milous/actions-pr-issue-comment+in:body+"Issue: %234"';
+	const searchUrl = 'https://api.github.com/search/issues?q=is:pr+repo:milous/actions-pr-issue-comment+in:body+%22Issue%3A+%234%22';
 	console.log(searchUrl);
 	const octokit = new github.getOctokit(token);
 
