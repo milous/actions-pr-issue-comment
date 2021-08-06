@@ -1,0 +1,10 @@
+name: "Update Pull Request and issue info"
+on: pull_request
+
+jobs:
+  update_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: milous/info-about-create-pr
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
