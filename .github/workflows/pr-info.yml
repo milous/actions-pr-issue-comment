@@ -10,6 +10,5 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           issue-additional: |
             ```
-            - Připraveno ve větvi `${{ github.head_ref }}`
-            - Připraveno v PR: #${{ github.event.number }}
+            - Připraveno ve větvi aaa
             ```
