@@ -8,7 +8,4 @@ jobs:
       - uses: milous/info-about-create-pr@master
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          issue-additional: |
-            ```
-            - Připraveno ve větvi aaa
-            ```
+          issue-additional: "bla bla bla"
