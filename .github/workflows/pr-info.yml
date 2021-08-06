@@ -8,7 +8,7 @@ jobs:
       - uses: milous/info-about-create-pr@master
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          issue-additional:
+          issue-additional: |
             ```
             - Připraveno ve větvi `${{ github.head_ref }}`
             - Připraveno v PR: #${{ github.event.number }}
