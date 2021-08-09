@@ -11,7 +11,7 @@ jobs:
           issue-body-prefix: "prefix"
           issue-body-suffix: "suffix"
           pr-body-prefix: |
-            pr prefix
+            pr prefix {issueNumber}
             testik
           pr-body-suffix: |
             sufixík
