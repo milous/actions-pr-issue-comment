@@ -8,4 +8,5 @@ jobs:
       - uses: milous/info-about-create-pr@master
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          issue-additional: "bla bla bla"
+          issue-additional: |
+          "bla bla bla multiline xyz"
