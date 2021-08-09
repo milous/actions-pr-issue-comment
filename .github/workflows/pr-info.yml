@@ -12,7 +12,7 @@ jobs:
           issue-body-suffix: "suffix"
           pr-body-prefix: |
             pr prefix #{issueNumber}
-            testik
+            testik {issueNumber} a PR number {prNumber}
           pr-body-suffix: |
-            sufixík
-            bla bla
+            sufixík{prNumber} {prNumber}
+            bla bla {issueNumber} {issueNumber} => {prNumber}
