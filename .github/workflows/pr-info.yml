@@ -9,4 +9,4 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           issue-additional: |
-          "bla bla bla multiline xyz"
+            bla bla bla multiline xyz
