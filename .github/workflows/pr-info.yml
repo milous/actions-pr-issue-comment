@@ -1,0 +1,18 @@
+name: "Update Pull Request and issue info"
+on: pull_request
+
+jobs:
+  update_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: milous/info-about-create-pr@master
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          issue-body-prefix: "prefix"
+          issue-body-suffix: "suffix"
+          pr-body-prefix: |
+            pr prefix #{issueNumber}
+            testik {issueNumber} a PR number {prNumber}
+          pr-body-suffix: |
+            sufixík{prNumber} {prNumber}
+            bla bla {issueNumber} {issueNumber} => {prNumber}
